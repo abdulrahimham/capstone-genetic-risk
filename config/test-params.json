@@ -1,0 +1,8 @@
+{
+    "genotype_dir": "test/testdata",
+    "genotype_file_prefix": "test",
+    "expression_path": "test/testdata/test_expression.txt",
+    "chromosomes": [1],
+    "example_chromosome": 1,
+    "output_dir": "test/outputs"
+}

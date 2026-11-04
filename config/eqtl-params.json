@@ -1,0 +1,6 @@
+{
+    "gene_id": "ENSG00000164308",
+    "gene_label": "ERAP2",
+    "cis_window_bp": 500000,
+    "n_top_snps": 10
+}

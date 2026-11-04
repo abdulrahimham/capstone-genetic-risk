@@ -1,0 +1,6 @@
+{
+    "gene_id": "TESTGENE1",
+    "gene_label": "TESTGENE1",
+    "cis_window_bp": 500000,
+    "n_top_snps": 5
+}

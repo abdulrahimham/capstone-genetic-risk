@@ -1,0 +1,6 @@
+1	rs_signal	0.0	900000	A	G
+1	rs_missing	0.0	1100000	A	G
+1	rs_null	0.0	1200000	A	G
+1	rs_monomorph	0.0	1300000	A	G
+1	rs_lowfreq	0.0	1400000	A	G
+1	rs_far	0.0	2000000	A	G

@@ -1,0 +1,8 @@
+{
+    "genotype_dir": "data/raw/LDREF",
+    "genotype_file_prefix": "1000G.EUR",
+    "expression_path": "data/raw/GD462.GeneQuantRPKM.50FN.samplename.resk10.txt",
+    "chromosomes": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22],
+    "example_chromosome": 15,
+    "output_dir": "outputs"
+}

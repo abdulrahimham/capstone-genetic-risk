@@ -1,0 +1,5 @@
+{
+    "rare_maf_cutoff": 0.01,
+    "common_maf_cutoff": 0.05,
+    "cis_window_bp": 500000
+}

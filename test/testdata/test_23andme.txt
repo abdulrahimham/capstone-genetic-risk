@@ -1,0 +1,7 @@
+# Made-up 23andMe-style file for unit tests
+# rsid	chromosome	position	genotype
+rs_signal	1	900000	AA
+rs_missing	1	1100000	AA
+rs_null	1	1200000	--
+rs_far	1	2000000	AG
+rs_not_in_panel	1	3000000	CC

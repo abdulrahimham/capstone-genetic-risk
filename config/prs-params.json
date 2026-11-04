@@ -1,0 +1,11 @@
+{
+    "gwas_path": "data/raw/Height.gwas.txt.gz",
+    "trait_label": "Height",
+    "min_info": 0.8,
+    "min_maf": 0.01,
+    "p_threshold": 0.001,
+    "clump_kb": 250,
+    "clump_r2": 0.1,
+    "person_23andme_path": "data/raw/tiffany_23andme.txt",
+    "person_label": "Tiffany"
+}

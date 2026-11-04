@@ -1,0 +1,11 @@
+{
+    "gwas_path": "test/testdata/test_gwas.txt",
+    "trait_label": "Test trait",
+    "min_info": 0.8,
+    "min_maf": 0.01,
+    "p_threshold": 0.001,
+    "clump_kb": 250,
+    "clump_r2": 0.1,
+    "person_23andme_path": "test/testdata/test_23andme.txt",
+    "person_label": "TESTPERSON"
+}
