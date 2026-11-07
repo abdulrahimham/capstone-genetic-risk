@@ -4,15 +4,6 @@ DSC 180A, Fall 2026. Domain: genetic risk prediction of gene expression, complex
 
 This project asks how well a person's DNA predicts their traits. It maps cis-eQTLs (SNPs linked to how much a gene is expressed) in 1000 Genomes European samples, builds clumping and thresholding (C+T) scores that predict gene expression from genotype, and builds a height polygenic risk score (PRS) for the 1000 Genomes panel and one 23andMe sample.
 
-| Week | What the code does | `run.py` target |
-|---|---|---|
-| 1 | Describes the genotype and expression files (formats, fields) | `data` |
-| 2 | Counts rare, low-frequency, and common SNPs; counts people in both datasets | `data`, `explore` |
-| 3 | cis-eQTL scan (±500 kb) for one gene (ERAP2) with a LocusZoom-style plot; SNPs per 1 Mb window across all genes | `eqtl`, `explore` |
-| 4 | cis-eQTL scan for every gene on chromosome 5; C+T expression score for ERAP2; 80/10/10 cross-validation for ERAP2 and every chromosome 5 gene | `gene-prs` |
-| 5 | Height PRS (C+T at p < 0.001) for 1000 Genomes and a 23andMe sample | `prs` |
-| 6 | cis-eQTL scan for every gene on chromosome 22; LocusZoom plot for FAM118A colored by LD with the lead SNP | notebook only |
-
 The `notebooks/` folder has one notebook per week that walks through the same analyses step by step.
 
 ## Data
@@ -51,35 +42,6 @@ python run.py clean     # delete outputs/ and test/outputs/
 Results go to `outputs/` (real data) or `test/outputs/` (test data), along with a `run.log`.
 
 To scan a different gene, change `gene_id` and `gene_label` in `config/eqtl-params.json`. To scan a different chromosome in Week 4, change `chromosome` in `config/gene-prs-params.json`.
-
-## Repo layout
-
-```
-├── run.py                     # build script: reads configs, calls src/ functions
-├── requirements.txt
-├── config/
-│   ├── data-params.json       # input paths, chromosomes, output folder
-│   ├── explore-params.json    # MAF cutoffs (1%, 5%), cis window size
-│   ├── eqtl-params.json       # which gene to scan
-│   ├── gene-prs-params.json   # Week 4 chromosome, p-value thresholds, clumping, train/tune/test split
-│   ├── prs-params.json        # Week 5 GWAS path, QC filters, p-value threshold, clumping
-│   └── test-*.json            # same settings, pointing at the test data
-├── src/
-│   ├── etl.py                 # read PLINK and expression files, match sample IDs
-│   ├── explore.py             # file descriptions, MAF groups, sample overlap, SNPs per window
-│   ├── eqtl.py                # cis window and per-SNP linear regression
-│   ├── gene_prs.py            # Week 4: chromosome scan, expression C+T score, cross-validation
-│   ├── prs.py                 # GWAS QC, allele alignment, LD clumping, scoring
-│   ├── genome_23andme.py      # read 23andMe raw data, match to the panel, write PLINK files
-│   └── plots.py               # LocusZoom-style plot, boxplot, PRS and accuracy plots
-├── notebooks/                 # one notebook per week (Weeks 1-6)
-└── test/
-    ├── make_test_data.py      # builds test/testdata/ (answers worked out by hand in its docstring)
-    ├── check_test_outputs.py  # checks that `run.py test` got those answers
-    └── testdata/              # tiny made-up PLINK, expression, GWAS, and 23andMe files
-```
-
-Reading data, analysis, and plotting each live in their own file, so a change to one (for example, a new expression file format) doesn't touch the others. Anything likely to change between experiments (the gene, the window, the cutoffs, the paths) is in `config/`, so trying a new gene means editing a JSON file, not code.
 
 ## Methods
 
