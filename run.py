@@ -7,7 +7,7 @@ Usage:
     python run.py explore    # MAF bins (rare / low frequency / common) per chromosome
     python run.py eqtl       # single-gene cis-eQTL scan + LocusZoom-style plot
     python run.py gene-prs   # week 4: cis-eQTL for every gene on a chromosome, gene expression PRS, cross-validation
-    python run.py prs        # height PRS (pruning + thresholding) for 1000 Genomes and the 23andMe sample
+    python run.py prs        # height PRS (clumping + thresholding) for 1000 Genomes and the 23andMe sample
     python run.py all        # data, explore, eqtl, gene-prs, prs on the real data
     python run.py test       # the full pipeline on the small made-up data in test/testdata
     python run.py clean      # delete everything in outputs/ and test/outputs/
@@ -157,7 +157,7 @@ def run_gene_prs(data_params, gene_params):
     """
     Week 4.
     Task 1: cis-eQTL for every gene on one chromosome (all shared individuals).
-    Task 2: P+T expression score for one gene, R^2 at each threshold, fit and
+    Task 2: C+T expression score for one gene, R^2 at each threshold, fit and
             evaluated on the same people (shows overfitting).
     Task 3: 80/10/10 cross-validation for that gene, then the same for every
             gene on the chromosome to get the distribution of prediction accuracy.
@@ -258,7 +258,7 @@ def run_gene_prs(data_params, gene_params):
 
 def run_prs(data_params, prs_params):
     """
-    Week 5: P+T polygenic score for every 1000 Genomes individual and, if a
+    Week 5: C+T polygenic score for every 1000 Genomes individual and, if a
     23andMe file is available, for that person too. When the person is
     included, only SNPs they were genotyped at are used, so everyone is
     scored on exactly the same SNPs.

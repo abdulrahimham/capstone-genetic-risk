@@ -1,5 +1,5 @@
 """
-prs.py: polygenic risk score (PRS) by pruning and thresholding (P+T), week 5.
+prs.py: polygenic risk score (PRS) by clumping and thresholding (C+T), week 5.
 
 Steps, following the PRS tutorial (choishingwan.github.io/PRS-Tutorial):
 1. QC the GWAS summary statistics: keep INFO > 0.8 and MAF > 0.01, drop

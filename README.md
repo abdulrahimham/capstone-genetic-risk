@@ -2,15 +2,16 @@
 
 DSC 180A, Fall 2026. Domain: genetic risk prediction of gene expression, complex traits, and polygenic disease (mentor: Tiffany Amariuta).
 
-This project asks how well a person's DNA predicts their traits. It maps cis-eQTLs (SNPs linked to how much a gene is expressed) in 1000 Genomes European samples, builds pruning and thresholding (P+T) scores that predict gene expression from genotype, and builds a height polygenic risk score (PRS) for the 1000 Genomes panel and one 23andMe sample.
+This project asks how well a person's DNA predicts their traits. It maps cis-eQTLs (SNPs linked to how much a gene is expressed) in 1000 Genomes European samples, builds clumping and thresholding (C+T) scores that predict gene expression from genotype, and builds a height polygenic risk score (PRS) for the 1000 Genomes panel and one 23andMe sample.
 
 | Week | What the code does | `run.py` target |
 |---|---|---|
 | 1 | Describes the genotype and expression files (formats, fields) | `data` |
 | 2 | Counts rare, low-frequency, and common SNPs; counts people in both datasets | `data`, `explore` |
 | 3 | cis-eQTL scan (±500 kb) for one gene (ERAP2) with a LocusZoom-style plot; SNPs per 1 Mb window across all genes | `eqtl`, `explore` |
-| 4 | cis-eQTL scan for every gene on chromosome 5; P+T expression score for ERAP2; 80/10/10 cross-validation for ERAP2 and every chromosome 5 gene | `gene-prs` |
-| 5 | Height PRS (P+T at p < 0.001) for 1000 Genomes and a 23andMe sample | `prs` |
+| 4 | cis-eQTL scan for every gene on chromosome 5; C+T expression score for ERAP2; 80/10/10 cross-validation for ERAP2 and every chromosome 5 gene | `gene-prs` |
+| 5 | Height PRS (C+T at p < 0.001) for 1000 Genomes and a 23andMe sample | `prs` |
+| 6 | cis-eQTL scan for every gene on chromosome 22; LocusZoom plot for FAM118A colored by LD with the lead SNP | notebook only |
 
 The `notebooks/` folder has one notebook per week that walks through the same analyses step by step.
 
@@ -67,11 +68,11 @@ To scan a different gene, change `gene_id` and `gene_label` in `config/eqtl-para
 │   ├── etl.py                 # read PLINK and expression files, match sample IDs
 │   ├── explore.py             # file descriptions, MAF groups, sample overlap, SNPs per window
 │   ├── eqtl.py                # cis window and per-SNP linear regression
-│   ├── gene_prs.py            # Week 4: chromosome scan, expression P+T score, cross-validation
+│   ├── gene_prs.py            # Week 4: chromosome scan, expression C+T score, cross-validation
 │   ├── prs.py                 # GWAS QC, allele alignment, LD clumping, scoring
 │   ├── genome_23andme.py      # read 23andMe raw data, match to the panel, write PLINK files
 │   └── plots.py               # LocusZoom-style plot, boxplot, PRS and accuracy plots
-├── notebooks/                 # one notebook per week (Weeks 1-5)
+├── notebooks/                 # one notebook per week (Weeks 1-6)
 └── test/
     ├── make_test_data.py      # builds test/testdata/ (answers worked out by hand in its docstring)
     ├── check_test_outputs.py  # checks that `run.py test` got those answers
@@ -87,7 +88,7 @@ Reading data, analysis, and plotting each live in their own file, so a change to
 - **MAF groups:** rare MAF < 1%, low frequency 1% to 5%, common > 5%.
 - **cis window:** SNPs within 500 kb of the gene position in the expression file (`Coord`).
 - **eQTL test:** simple linear regression, expression ~ copies, one SNP at a time. Significance uses a Bonferroni cutoff of 0.05 / (number of SNPs tested for that gene).
-- **P+T scores:** clump SNPs (LD r² > 0.1 within 250 kb, LD from the genotype panel; for Week 4, from the training people only), keep clumped SNPs below the p-value threshold, score = sum of effect size x copies.
+- **C+T scores:** clump SNPs (LD r² > 0.1 within 250 kb, LD from the genotype panel; for Week 4, from the training people only), keep clumped SNPs below the p-value threshold, score = sum of effect size x copies.
 - **Week 4 cross-validation:** one random split (seed in config) of the 344 people into 275 training, 34 tuning, and 35 testing. Effect sizes come from training, the threshold with the best tuning R² is chosen, and R² is reported on the testing people.
 - **Week 5 GWAS QC:** INFO > 0.8, MAF > 0.01, drop strand-ambiguous (A/T, C/G) and duplicate SNPs, beta = log(OR). GWAS alleles are aligned to the 1000 Genomes counted allele (flipping the sign when swapped, and checking the opposite strand).
 - **Week 5 with a 23andMe sample:** the score is rebuilt using only SNPs the person was genotyped at, and the 1000 Genomes panel is rescored on that same set, so everyone is compared on the same SNPs.

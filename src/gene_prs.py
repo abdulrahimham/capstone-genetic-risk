@@ -3,7 +3,7 @@ gene_prs.py: week 4.
 
 1. cis-eQTL scan for every gene on one chromosome (week 3 scaled up).
 2. A polygenic score for a gene's expression, built from its cis-eQTL
-   results by pruning and thresholding (P+T): clump the cis SNPs once, then
+   results by clumping and thresholding (C+T): clump the cis SNPs once, then
    score people using only the clumped SNPs below each p-value threshold.
 3. Cross-validation so the score's accuracy isn't measured on the same
    people it was fit on:
