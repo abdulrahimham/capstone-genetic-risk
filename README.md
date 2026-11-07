@@ -62,3 +62,7 @@ To scan a different gene, change `gene_id` and `gene_label` in `config/eqtl-para
 - No covariates (sex, ancestry PCs) in the regression. The expression file already has 10 hidden factors removed ("resk10").
 - Week 4's testing group is 35 people, so each gene's test accuracy is noisy. The distribution across genes is more reliable than any single gene.
 - The height PRS has no sex term and the panel mixes men and women, so a percentile ranks genetic score, not height within one sex.
+
+## AI Usage and Contributions
+
+I used AI tools, primarily ChatGPT, to help organize week-to-week notebook and progress-report templates, explain background biology and genetics concepts, and improve the clarity of written documentation. I was responsible for making research and methodological decisions, implementing and testing the analysis pipeline, running the analyses, interpreting the results, and reviewing the final work for accuracy.
